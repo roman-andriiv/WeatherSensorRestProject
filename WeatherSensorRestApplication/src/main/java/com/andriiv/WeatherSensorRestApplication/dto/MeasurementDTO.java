@@ -7,26 +7,39 @@ import javax.validation.constraints.NotNull;
 /**
  * A DTO for the {@link com.andriiv.WeatherSensorRestApplication.models.Measurement} entity
  */
-public class MeasurementDTO{
+public class MeasurementDTO {
     @NotNull
     @Min(-100)
     @Max(100)
     private Double value;
+
     @NotNull
-    private Boolean raining;
+    private Boolean isRaining;
+
     @NotNull
     private SensorDTO sensor;
-
 
     public Double getValue() {
         return value;
     }
 
+    public void setValue(Double value) {
+        this.value = value;
+    }
+
     public Boolean getRaining() {
-        return raining;
+        return isRaining;
+    }
+
+    public void setRaining(Boolean raining) {
+        isRaining = raining;
     }
 
     public SensorDTO getSensor() {
         return sensor;
+    }
+
+    public void setSensor(SensorDTO sensor) {
+        this.sensor = sensor;
     }
 }
