@@ -3,6 +3,7 @@ package com.andriiv.WeatherSensorRestApplication.controllers;
 import com.andriiv.WeatherSensorRestApplication.dto.SensorDTO;
 import com.andriiv.WeatherSensorRestApplication.models.Sensor;
 import com.andriiv.WeatherSensorRestApplication.services.SensorService;
+import com.andriiv.WeatherSensorRestApplication.util.MeasurementErrorResponse;
 import com.andriiv.WeatherSensorRestApplication.util.MeasurementException;
 import com.andriiv.WeatherSensorRestApplication.util.SensorValidator;
 import org.modelmapper.ModelMapper;
@@ -53,5 +54,13 @@ public class SensorsController {
         return modelMapper.map(sensorDTO, Sensor.class);
     }
 
+    @ExceptionHandler
+    private ResponseEntity<MeasurementErrorResponse> handleException(MeasurementException e) {
+        MeasurementErrorResponse response = new MeasurementErrorResponse(
+                e.getMessage(),
+                System.currentTimeMillis()
+        );
 
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
 }
